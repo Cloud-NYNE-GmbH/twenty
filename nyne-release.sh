@@ -38,12 +38,22 @@ cd "$(dirname "$0")"
 
 TAG="${1:-$(git rev-parse --short HEAD)}"
 
-# Node 24 is required (engines: ^24.5.0). Warn rather than hard-fail.
+# Node 24 is required (engines: ^24.5.0). If the active node isn't 24, try to
+# pick up a Homebrew node@24 automatically; otherwise warn and continue.
 NODE_MAJOR="$(node -p 'process.versions.node.split(".")[0]' 2>/dev/null || echo 0)"
 if [ "$NODE_MAJOR" != "24" ]; then
+  for nm in /opt/homebrew/opt/node@24/bin /usr/local/opt/node@24/bin; do
+    if [ -x "$nm/node" ]; then
+      export PATH="$nm:$PATH"
+      echo "Using Node $("$nm/node" -p 'process.versions.node') from $nm."
+      NODE_MAJOR=24
+      break
+    fi
+  done
+fi
+if [ "$NODE_MAJOR" != "24" ]; then
   echo "WARNING: Node ${NODE_MAJOR}.x detected — this repo targets Node 24 (^24.5.0)." >&2
-  echo "         If the build misbehaves, switch to Node 24 (e.g. 'brew install node@24'" >&2
-  echo "         and put /opt/homebrew/opt/node@24/bin first on PATH)." >&2
+  echo "         If the build misbehaves: brew install node@24." >&2
 fi
 
 # nx shells out to 'yarn build' internally. If no global yarn/corepack is set
