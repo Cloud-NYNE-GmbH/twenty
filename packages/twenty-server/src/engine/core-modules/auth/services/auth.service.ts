@@ -952,7 +952,10 @@ export class AuthService {
       locale,
       returnToPath,
     }: MicrosoftRequest['user'] | GoogleRequest['user'],
-    authProvider: AuthProviderEnum.Google | AuthProviderEnum.Microsoft,
+    authProvider:
+      | AuthProviderEnum.Google
+      | AuthProviderEnum.Microsoft
+      | AuthProviderEnum.Oidc,
   ): Promise<string> {
     const email = rawEmail.toLowerCase();
 
@@ -1059,12 +1062,16 @@ export class AuthService {
         billingCheckoutSessionState,
       });
 
-      await this.createSSOConnectedAccountIfFeatureFlagIsOn({
-        workspaceId: workspace.id,
-        userId: user.id,
-        handle: email,
-        authProvider,
-      });
+      // Generic OIDC login (Authentik) is identity-only — there is no mailbox
+      // or calendar to sync, so we do not create a connected account for it.
+      if (authProvider !== AuthProviderEnum.Oidc) {
+        await this.createSSOConnectedAccountIfFeatureFlagIsOn({
+          workspaceId: workspace.id,
+          userId: user.id,
+          handle: email,
+          authProvider,
+        });
+      }
 
       const loginToken = await this.loginTokenService.generateLoginToken(
         user.email,

@@ -27,6 +27,8 @@ export const getAuthProvidersByWorkspace = ({
       workspace.isPasswordAuthEnabled && systemEnabledProviders.password,
     microsoft:
       workspace.isMicrosoftAuthEnabled && systemEnabledProviders.microsoft,
+    // OIDC is instance-level only — no per-workspace toggle to AND against.
+    oidc: systemEnabledProviders.oidc,
     sso: workspace.workspaceSSOIdentityProviders
       .map((identityProvider: WorkspaceSSOIdentityProviderEntity) =>
         identityProvider.status === SSOIdentityProviderStatus.Active

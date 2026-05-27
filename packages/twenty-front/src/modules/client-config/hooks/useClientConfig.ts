@@ -154,6 +154,7 @@ export const useClientConfig = (): UseClientConfigResult => {
       setAuthProviders({
         google: clientConfig.authProviders.google,
         microsoft: clientConfig.authProviders.microsoft,
+        oidc: clientConfig.authProviders.oidc,
         password: clientConfig.authProviders.password,
         magicLink: false,
         sso: clientConfig.authProviders.sso,

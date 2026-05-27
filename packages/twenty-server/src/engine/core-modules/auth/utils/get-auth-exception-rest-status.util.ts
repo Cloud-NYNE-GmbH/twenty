@@ -19,6 +19,7 @@ export const getAuthExceptionRestStatus = (exception: AuthException) => {
     case AuthExceptionCode.SIGNUP_DISABLED:
     case AuthExceptionCode.GOOGLE_API_AUTH_DISABLED:
     case AuthExceptionCode.MICROSOFT_API_AUTH_DISABLED:
+    case AuthExceptionCode.OIDC_AUTH_DISABLED:
     case AuthExceptionCode.MISSING_ENVIRONMENT_VARIABLE:
     case AuthExceptionCode.EMAIL_NOT_VERIFIED:
     case AuthExceptionCode.INVALID_JWT_TOKEN_TYPE:

@@ -10,6 +10,7 @@ import { StyledOnboardingContentContainer } from '@/auth/components/StyledOnboar
 import { SignInUpWithCredentials } from '@/auth/sign-in-up/components/internal/SignInUpWithCredentials';
 import { SignInUpWithGoogle } from '@/auth/sign-in-up/components/internal/SignInUpWithGoogle';
 import { SignInUpWithMicrosoft } from '@/auth/sign-in-up/components/internal/SignInUpWithMicrosoft';
+import { SignInUpWithOidc } from '@/auth/sign-in-up/components/internal/SignInUpWithOidc';
 import { useHandleResetPassword } from '@/auth/sign-in-up/hooks/useHandleResetPassword';
 import { useSignInUpForm } from '@/auth/sign-in-up/hooks/useSignInUpForm';
 import { useSignUpInNewWorkspace } from '@/auth/sign-in-up/hooks/useSignUpInNewWorkspace';
@@ -225,9 +226,15 @@ export const SignInUpGlobalScopeForm = () => {
               isGlobalScope
             />
           )}
-          {(authProviders.google || authProviders.microsoft) && (
-            <HorizontalSeparator />
+          {authProviders.oidc && (
+            <SignInUpWithOidc
+              action="list-available-workspaces"
+              isGlobalScope
+            />
           )}
+          {(authProviders.google ||
+            authProviders.microsoft ||
+            authProviders.oidc) && <HorizontalSeparator />}
           {/* oxlint-disable-next-line react/jsx-props-no-spreading */}
           <FormProvider {...form}>
             <SignInUpWithCredentials isGlobalScope />

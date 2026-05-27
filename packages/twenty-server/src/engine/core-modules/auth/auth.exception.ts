@@ -28,6 +28,7 @@ export const AuthExceptionCode = appendCommonExceptionCode({
   SIGNUP_DISABLED: 'SIGNUP_DISABLED',
   GOOGLE_API_AUTH_DISABLED: 'GOOGLE_API_AUTH_DISABLED',
   MICROSOFT_API_AUTH_DISABLED: 'MICROSOFT_API_AUTH_DISABLED',
+  OIDC_AUTH_DISABLED: 'OIDC_AUTH_DISABLED',
   MISSING_ENVIRONMENT_VARIABLE: 'MISSING_ENVIRONMENT_VARIABLE',
   ENTERPRISE_VALIDITY_TOKEN_NOT_VALID: 'ENTERPRISE_VALIDITY_TOKEN_NOT_VALID',
   INVALID_JWT_TOKEN_TYPE: 'INVALID_JWT_TOKEN_TYPE',
@@ -73,6 +74,8 @@ const getAuthExceptionUserFriendlyMessage = (
       return msg`Google API authentication is disabled.`;
     case AuthExceptionCode.MICROSOFT_API_AUTH_DISABLED:
       return msg`Microsoft API authentication is disabled.`;
+    case AuthExceptionCode.OIDC_AUTH_DISABLED:
+      return msg`OIDC authentication is disabled.`;
     case AuthExceptionCode.MISSING_ENVIRONMENT_VARIABLE:
       return msg`A required configuration is missing.`;
     case AuthExceptionCode.TWO_FACTOR_AUTHENTICATION_PROVISION_REQUIRED:

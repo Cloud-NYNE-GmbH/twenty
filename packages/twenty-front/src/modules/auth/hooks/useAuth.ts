@@ -562,6 +562,18 @@ export const useAuth = () => {
     [buildRedirectUrl, redirect],
   );
 
+  const handleOidcLogin = useCallback(
+    (params: {
+      workspacePersonalInviteToken?: string;
+      workspaceInviteHash?: string;
+      billingCheckoutSession?: BillingCheckoutSession;
+      action: string;
+    }) => {
+      redirect(buildRedirectUrl('/auth/oidc', params));
+    },
+    [buildRedirectUrl, redirect],
+  );
+
   const handleGetAuthTokensFromOTP = useCallback(
     async (otp: string, loginToken: string, captchaToken?: string) => {
       const getAuthTokensFromOtpResult = await getAuthTokensFromOtp({
@@ -603,6 +615,7 @@ export const useAuth = () => {
     signInWithCredentials: handleCredentialsSignIn,
     signInWithGoogle: handleGoogleLogin,
     signInWithMicrosoft: handleMicrosoftLogin,
+    signInWithOidc: handleOidcLogin,
     setAuthTokens: handleSetAuthTokens,
     getAuthTokensFromOTP: handleGetAuthTokensFromOTP,
   };

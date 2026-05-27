@@ -238,6 +238,53 @@ export class ConfigVariables {
   @ValidateIf((env) => env.AUTH_MICROSOFT_ENABLED)
   AUTH_MICROSOFT_APIS_CALLBACK_URL: string;
 
+  @ConfigVariablesMetadata({
+    group: ConfigVariablesGroup.OIDC_AUTH,
+    description: 'Enable or disable generic OIDC authentication',
+    type: ConfigVariableType.BOOLEAN,
+  })
+  @IsOptional()
+  AUTH_OIDC_ENABLED = false;
+
+  @ConfigVariablesMetadata({
+    group: ConfigVariablesGroup.OIDC_AUTH,
+    isSensitive: false,
+    description:
+      'OIDC issuer URL (the base used for discovery, e.g. https://auth.nyne.lan/application/o/twenty/)',
+    type: ConfigVariableType.STRING,
+  })
+  @IsUrl({ require_tld: false, require_protocol: true })
+  @ValidateIf((env) => env.AUTH_OIDC_ENABLED)
+  AUTH_OIDC_ISSUER_URL: string;
+
+  @ConfigVariablesMetadata({
+    group: ConfigVariablesGroup.OIDC_AUTH,
+    isSensitive: false,
+    description: 'Client ID for OIDC authentication',
+    type: ConfigVariableType.STRING,
+  })
+  @ValidateIf((env) => env.AUTH_OIDC_ENABLED)
+  AUTH_OIDC_CLIENT_ID: string;
+
+  @ConfigVariablesMetadata({
+    group: ConfigVariablesGroup.OIDC_AUTH,
+    isSensitive: true,
+    description: 'Client secret for OIDC authentication',
+    type: ConfigVariableType.STRING,
+  })
+  @ValidateIf((env) => env.AUTH_OIDC_ENABLED)
+  AUTH_OIDC_CLIENT_SECRET: string;
+
+  @ConfigVariablesMetadata({
+    group: ConfigVariablesGroup.OIDC_AUTH,
+    isSensitive: false,
+    description: 'Callback URL for OIDC authentication',
+    type: ConfigVariableType.STRING,
+  })
+  @IsUrl({ require_tld: false, require_protocol: true })
+  @ValidateIf((env) => env.AUTH_OIDC_ENABLED)
+  AUTH_OIDC_CALLBACK_URL: string;
+
   /**
    * @deprecated Use is now GA - record page layouts are always seeded
    */

@@ -23,6 +23,9 @@ const isAuthEnabledOrThrow = (
   if (provider === AuthProviderEnum.Password && workspace.isPasswordAuthEnabled)
     return true;
   if (provider === AuthProviderEnum.SSO) return true;
+  // Generic OIDC is gated at the instance level (AUTH_OIDC_ENABLED), not
+  // per-workspace, so it is allowed for every workspace when enabled.
+  if (provider === AuthProviderEnum.Oidc) return true;
 
   throw exceptionToThrowCustom;
 };
@@ -40,6 +43,7 @@ const isAuthEnabled = (
     return true;
   if (provider === AuthProviderEnum.Password && workspace.isPasswordAuthEnabled)
     return true;
+  if (provider === AuthProviderEnum.Oidc) return true;
 
   return false;
 };

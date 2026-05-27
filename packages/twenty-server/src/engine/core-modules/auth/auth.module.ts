@@ -16,6 +16,8 @@ import { GoogleAPIsAuthController } from 'src/engine/core-modules/auth/controlle
 import { GoogleAuthController } from 'src/engine/core-modules/auth/controllers/google-auth.controller';
 import { MicrosoftAPIsAuthController } from 'src/engine/core-modules/auth/controllers/microsoft-apis-auth.controller';
 import { MicrosoftAuthController } from 'src/engine/core-modules/auth/controllers/microsoft-auth.controller';
+import { OidcAuthController } from 'src/engine/core-modules/auth/controllers/oidc-auth.controller';
+import { OidcClientService } from 'src/engine/core-modules/auth/services/oidc-client.service';
 import { OAuthPropagatorController } from 'src/engine/core-modules/auth/controllers/oauth-propagator.controller';
 import { SSOAuthController } from 'src/engine/core-modules/auth/controllers/sso-auth.controller';
 import { AuthSsoService } from 'src/engine/core-modules/auth/services/auth-sso.service';
@@ -135,6 +137,7 @@ import { JwtAuthStrategy } from './strategies/jwt.auth.strategy';
     MicrosoftAuthController,
     GoogleAPIsAuthController,
     MicrosoftAPIsAuthController,
+    OidcAuthController,
     OAuthPropagatorController,
     SSOAuthController,
     ConnectionProviderOAuthController,
@@ -149,6 +152,7 @@ import { JwtAuthStrategy } from './strategies/jwt.auth.strategy';
     GoogleAPIScopesService,
     GoogleApisServiceAvailabilityService,
     MicrosoftAPIsService,
+    OidcClientService,
     AppTokenService,
     AccessTokenService,
     RefreshTokenService,

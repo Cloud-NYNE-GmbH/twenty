@@ -88,6 +88,7 @@ describe('SignInUpGlobalScopeForm', () => {
       google: false,
       magicLink: false,
       microsoft: false,
+      oidc: false,
       password: true,
       sso: [],
     });

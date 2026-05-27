@@ -43,6 +43,13 @@ export const CONFIG_VARIABLES_GROUP_METADATA: Record<
     isHiddenOnLoad: false,
     isHiddenInAdminPanel: false,
   },
+  [ConfigVariablesGroup.OIDC_AUTH]: {
+    position: 550,
+    description:
+      'Configure generic OIDC login against a self-hosted identity provider (e.g. Authentik)',
+    isHiddenOnLoad: false,
+    isHiddenInAdminPanel: false,
+  },
   [ConfigVariablesGroup.EMAIL_SETTINGS]: {
     position: 600,
     description:

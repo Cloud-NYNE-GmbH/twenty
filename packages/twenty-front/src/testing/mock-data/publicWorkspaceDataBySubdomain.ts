@@ -18,6 +18,7 @@ export const mockedPublicWorkspaceDataBySubdomain: GetPublicWorkspaceDataByDomai
       magicLink: false,
       password: true,
       microsoft: false,
+      oidc: false,
     },
     authBypassProviders: {
       __typename: 'AuthBypassProviders',
