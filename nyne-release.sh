@@ -86,9 +86,16 @@ fi
 #    own (OOM-prone) frontend build.
 echo "Building ${IMAGE}:${TAG} for ${PLATFORM} (also tagging :latest)…"
 
+# IMPORTANT: build the `twenty` stage explicitly. The Dockerfile's LAST stage
+# is `twenty-app-dev` — an all-in-one dev image that embeds Postgres+Redis+s6
+# and reaches for a `default` DB on localhost. Without --target, buildx picks
+# that stage and the result is a container that cannot talk to our external
+# twenty-db. The `twenty` stage is server+frontend, no embedded services, uses
+# PG_DATABASE_URL via /app/entrypoint.sh — what our compose actually expects.
 docker buildx build \
   --platform "${PLATFORM}" \
   -f packages/twenty-docker/twenty/Dockerfile \
+  --target twenty \
   -t "${IMAGE}:${TAG}" \
   -t "${IMAGE}:latest" \
   --push \
