@@ -4001,6 +4001,11 @@ msgstr "המשך"
 msgid "Continue on iteration failure"
 msgstr "המשך בעת כשל באיטרציה"
 
+#. js-lingui-id: GwkjIa
+#: src/modules/auth/sign-in-up/components/internal/SignInUpWithOidc.tsx
+msgid "Continue with Authentik"
+msgstr ""
+
 #. js-lingui-id: RvVi9c
 #: src/modules/auth/sign-in-up/components/internal/SignInUpWithCredentials.tsx
 msgid "Continue with Email"
