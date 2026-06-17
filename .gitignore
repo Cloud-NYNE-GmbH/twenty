@@ -2,6 +2,12 @@
 .DS_Store
 /.idea
 .claude/
+# Track only .claude/memories/ — rest of .claude/ stays ignored
+!.claude/
+.claude/*
+!.claude/memories/
+.claude/memories/*
+!.claude/memories/**
 .cursor/debug-*.log
 **/**/node_modules/
 .cache
